@@ -19,7 +19,7 @@ export default {
 </template>
 <style lang="scss" scoped>
 img{
-    width: 80px;
+    width: 100px;
 }
     
 </style>

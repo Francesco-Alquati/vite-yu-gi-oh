@@ -9,7 +9,7 @@ export default {
 }
 </script>
 <template>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-3 my-3" v-for="card in store.cardsList" :key="card.id">
                 <div class="bg-yugi min-wh b-grey position-relative d-flex flex-column align-items-center justify-content-center text-white text-center">
