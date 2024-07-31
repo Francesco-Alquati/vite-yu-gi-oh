@@ -11,10 +11,10 @@ export default{
     
   },
   created() {
-    this.getcardsList();
+    this.getCardsList();
   },
   methods: {
-    getcardsList(){
+    getCardsList(){
       axios.get(store.apiUrl).then((result) =>{
         store.cardsList = result.data.data;
       });
@@ -43,7 +43,7 @@ export default{
       </div>
     </div>
   </div>
-  <div class="container b-white">
+  <div class="container mt-2">
     <div class="row">
         <div class="col-12">
           
@@ -65,8 +65,9 @@ main{
   min-height: calc(100vh - 88px); 
   margin: 0; 
   padding: 0; 
-  background-image: url('https://www.yugioh-card.com/eu/wp-content/uploads/2022/09/OTS-hero-banner-v02.webp');
-  background-size: cover;
+  background-image: url('https://www.yugioh-card.com/eu/wp-content/uploads/2022/09/WCQ-hero-banner.webp');
+  background-size: contain;
+  
 }
 select{
   width: 120px;
