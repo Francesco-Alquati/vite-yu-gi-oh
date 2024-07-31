@@ -2,19 +2,19 @@
 import { store } from './store.js';
 import  axios  from 'axios';
 import AppHeader from './components/AppHeader.vue';
-import AppCards from './components/AppCards.vue';
+import Cards from './components/Cards.vue';
 
 export default{
   components:{
     AppHeader,
-    AppCards,
+    Cards,
     
   },
   created() {
-    this.getCardsList();
+    this.getcardsList();
   },
   methods: {
-    getCardsList(){
+    getcardsList(){
       axios.get(store.apiUrl).then((result) =>{
         store.cardsList = result.data.data;
       });
@@ -42,9 +42,16 @@ export default{
         </select>
       </div>
     </div>
+  </div>
+  <div class="container b-white">
     <div class="row">
-      <div class="col-12">
-        <AppCards />
+        <div class="col-12">
+          
+        </div>
+    </div>
+    <div class="row">
+      <div class="">
+        <Cards />
       </div>
     </div>
   </div>
