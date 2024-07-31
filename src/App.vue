@@ -2,11 +2,13 @@
 import { store } from './store.js';
 import  axios  from 'axios';
 import AppHeader from './components/AppHeader.vue';
-import AppMain from './components/AppMain.vue';
+import AppCards from './components/AppCards.vue';
+
 export default{
   components:{
     AppHeader,
-    AppMain,
+    AppCards,
+    
   },
   created() {
     this.getCardsList();
@@ -34,7 +36,16 @@ export default{
  <main>
   <div class="container">
     <div class="row">
-
+      <div class="col-12">
+        <select class="mt-5" v-model="selectedArchetype" name="archetype" id="">
+          <option value="option1">Alien</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <AppCards />
+      </div>
     </div>
   </div>
 
@@ -43,4 +54,15 @@ export default{
 
 <style lang="scss">
 @import './styles/generals.scss';
+main{
+  min-height: calc(100vh - 88px); 
+  margin: 0; 
+  padding: 0; 
+  background-image: url('https://www.yugioh-card.com/eu/wp-content/uploads/2022/09/OTS-hero-banner-v02.webp');
+  background-size: cover;
+}
+select{
+  width: 120px;
+}
+
 </style>
