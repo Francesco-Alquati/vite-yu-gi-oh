@@ -3,20 +3,42 @@ import { store } from './store.js';
 import  axios  from 'axios';
 import AppHeader from './components/AppHeader.vue';
 import Cards from './components/Cards.vue';
+import AppLoader from './components/AppLoader.vue';
+import AppSearchArchetype from './components/AppSearchArchetype.vue';
 
 export default{
   components:{
     AppHeader,
     Cards,
+    AppLoader,
+    AppSearchArchetype,
     
   },
   created() {
-    this.getCardsList();
+    this.getCards();
+    this.getArchetype();
   },
   methods: {
-    getCardsList(){
-      axios.get(store.apiUrl).then((result) =>{
-        store.cardsList = result.data.data;
+    getCards(){
+      if(store.archetype_search !== ''){
+          axios.get(`${store.apiUrl}&archetype=${store.archetype_search}`).then((response) =>{
+          store.cardsList = response.data.data;
+          store.loading = false;
+        });
+      }
+      else{
+          axios.get(store.apiUrl).then((response) =>{
+          store.cardsList = response.data.data;
+          store.loading = false;
+        });
+      }
+    },
+    getArchetype(){
+      axios.get(store.apiArchetypeUrl).then((response) => {
+        for(let i = 0; i<30; i++){
+          store.archetypeList.push(response.data[i]) ;
+        }
+        
       });
     }
   },
@@ -35,27 +57,16 @@ export default{
  </header>
  <main>
   <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <select class="mt-5" v-model="selectedArchetype" name="archetype" id="">
-          <option value="option1">Alien</option>
-        </select>
+    <div class="row" >
+      <div class="col-12 text-center mb-3">
+      <AppSearchArchetype @filter_cards="getCards()"/>
       </div>
-    </div>
-  </div>
-  <div class="container mt-2">
-    <div class="row">
-        <div class="col-12">
-          
-        </div>
-    </div>
-    <div class="row">
-      <div class="">
+      <AppLoader  v-if="store.loading"/>
+      <div class="col-12" v-else>
         <Cards />
       </div>
     </div>
   </div>
-
  </main>
 </template>
 
